@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ancient WTF???</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type='text/javascript' src='http://d3js.org/d3.v3.min.js'></script>
+    <script type='text/javascript' src='http://d3js.org/topojson.v1.min.js'></script>
+    <script src="planetaryjs.min.js"></script>
+    <script src="ancient-wtfs.json"></script>
+    <script src="latlng.js"></script>
+    <style type="text/css">
+    body {
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        background: #212121 url(stars.png) repeat top center;
+        padding: 0;
+        margin: 0;
+        font-family: 'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;
+    }
+    
+    canvas {
+        z-index: 1;
+    }
+    
+    #selected, #explanation {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 16px;
+        z-index: 2;
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+    
+    #selected a, #explanation a {
+        color: lime;
+        text-decoration: none;
+    }
+
+    #explanation{
+      left:auto;
+      top:auto;
+      right:0;
+      bottom: 0;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="stars"></div>
+    <div id="selected"></div>
+    <div id="explanation">
+      <a href="https://en.wikipedia.org/wiki/Testing_hypotheses_suggested_by_the_data" target="_blank">Explanation</a>
+    </div>
+    <script>
+    'use strict';
+    (function() {
+        var canvas = document.createElement('canvas');
+        canvas.id = 'rotatingGlobe';
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        document.body.appendChild(canvas);
+
+        window.globe = planetaryjs.planet();
+        // Load our custom `autorotate` plugin; see below.
+        // globe.loadPlugin(autorotate(10));
+        // The `earth` plugin draws the oceans and the land; it's actually
+        // a combination of several separate built-in plugins.
+        //
+        // Note that we're loading a special TopoJSON file
+        // (world-110m-withlakes.json) so we can render lakes.
+        globe.loadPlugin(planetaryjs.plugins.earth({
+            topojson: {
+                file: 'world-110m-withlakes.json'
+            },
+            oceans: {
+                fill: '#448AFF'
+            },
+            land: {
+                fill: '#B9F6CA'
+            },
+            borders: {
+                stroke: '#A5D6A7'
+            }
+        }));
+
+        // The `pings` plugin draws animated pings on the globe.
+        globe.loadPlugin(planetaryjs.plugins.pings());
+        // The `zoom` and `drag` plugins enable
+        // manipulating the globe with the mouse.
+        globe.loadPlugin(planetaryjs.plugins.zoom({
+            scaleExtent: [100, 2000]
+        }));
+        globe.loadPlugin(planetaryjs.plugins.drag({
+            // Dragging the globe should pause the
+            // automatic rotation until we release the mouse.
+            onDragStart: function() {
+                this.plugins.autorotate.pause();
+            },
+            onDragEnd: function() {
+                this.plugins.autorotate.resume();
+            }
+        }));
+
+
+        function lineAroundGlobe(phi) {
+            var c = b.minus(a.times(a.dot(b)));
+            var res = a.times(Math.cos(phi)).plus(c.times(Math.sin(phi))).toLatLonS();
+            return [res.lon, res.lat];
+        }
+
+        // lets draw a line from Nazca to Giza
+        var a = LatLon(-14.716667, -75.133333).toVector(); //nazca lines
+        var b = LatLon(29.979175, 31.134358).toVector(); //giza
+
+        var line1 = [lineAroundGlobe(0),
+            lineAroundGlobe(Math.PI / 2),
+            lineAroundGlobe(Math.PI),
+            lineAroundGlobe(Math.PI * 3 / 2),
+            lineAroundGlobe(0)
+        ]
+
+        //And a second one perpendicular to Nazca
+        var b = a.cross(b); 
+
+        var line2 = [lineAroundGlobe(0),
+            lineAroundGlobe(Math.PI / 2),
+            lineAroundGlobe(Math.PI),
+            lineAroundGlobe(Math.PI * 3 / 2),
+            lineAroundGlobe(0)
+        ]
+
+
+        globe.loadPlugin(function(planet) {
+            planet.onDraw(function() {
+                planet.withSavedContext(function(context) {
+                    var geoLineString = {
+                        "type": "LineString",
+                        "coordinates": line1
+                    };
+
+                    var geoPath = d3.geo.path();
+                    context.beginPath();
+                    planet.path.context(context)(geoLineString);
+
+                    context.strokeStyle = '#FF6E40';
+                    context.lineWidth = 1;
+                    // context.fill();
+                    context.stroke();
+
+                });
+            });
+        });
+
+        globe.loadPlugin(function(planet) {
+            planet.onDraw(function() {
+                planet.withSavedContext(function(context) {
+                    var geoLineString = {
+                        "type": "LineString",
+                        "coordinates": line2
+                    };
+
+                    var geoPath = d3.geo.path();
+                    context.beginPath();
+                    planet.path.context(context)(geoLineString);
+
+                    context.strokeStyle = '#FF6E40';
+                    context.lineWidth = 1;
+                    // context.fill();
+                    context.stroke();
+
+                });
+            });
+        });
+
+
+        // Set up the globe's initial scale, offset, and rotation.
+        globe.projection.scale(300).translate([canvas.width / 2, canvas.height / 2]).rotate([0, 0, 0]);
+
+        globe.loadPlugin(function(planet) {
+            planet.onDraw(function() {
+
+                planet.withSavedContext(function(context) {
+
+
+                    wtfs.forEach(function(wtf) {
+                        var circle = d3.geo
+                            .circle()
+                            .origin([wtf.loc.lng, wtf.loc.lat])
+                            .angle(0.02)();
+
+                        context.beginPath();
+                        context.fillStyle = '#F50057';
+                        context.strokeStyle = '#F50057';
+                        planet.path.context(context)(circle);
+                        context.stroke();
+                        context.fill();
+                    });
+
+                    if (!globe.selected)
+                        return;
+
+                    var circle = d3.geo
+                        .circle()
+                        .origin([globe.selected.loc.lng, globe.selected.loc.lat])
+                        .angle(0.3)();
+
+                    context.beginPath();
+                    context.fillStyle = 'green';
+                    context.strokeStyle = 'green';
+                    planet.path.context(context)(circle);
+                    context.stroke();
+                    context.fill();
+                });
+            });
+        });
+
+
+
+        globe.loadPlugin(function(planet) {
+            canvas.onmousemove = function(e) {
+                var click = planet.projection.invert([e.pageX, e.pageY]);
+                var x = LatLon(click[0], click[1]).toVector();
+
+                var min = Infinity;
+                globe.selected = null;
+
+                wtfs.forEach(function(wtf) {
+                    var y = LatLon(wtf.loc.lng, wtf.loc.lat).toVector();
+                    var d = y.minus(x).length();
+                    if (d < min) {
+                        min = d;
+                        globe.selected = wtf;
+                    }
+                });
+                document.getElementById('selected').innerHTML = '<a target="blank" href="' + globe.selected.wiki + '">' + globe.selected.name + '</a>';
+            }
+
+            canvas.ondblclick = function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                if (!globe.selected)
+                    return;
+                var click = planet.projection.invert([e.pageX, e.pageY]);
+                var x = LatLon(click[0], click[1]).toVector();
+
+                var min = Infinity;
+                var clicked = null;
+
+                wtfs.forEach(function(wtf) {
+                    var y = LatLon(wtf.loc.lng, wtf.loc.lat).toVector();
+                    var d = y.minus(x).length();
+                    if (d < min) {
+                        min = d;
+                        clicked = wtf;
+                    }
+                });
+                if(!clicked)
+                  return;
+                if(clicked == globe.selected){
+                  window.open(clicked.wiki,'_wiki');
+                }
+                return false;
+            }
+        });
+
+        // Every few hundred milliseconds, we'll draw another random ping.
+        setInterval(function() {
+            var wtf = wtfs[Math.floor(Math.random() * wtfs.length)];
+
+            var lat = wtf.loc.lat;
+            var lng = wtf.loc.lng;
+            var color = '#F50057';
+            globe.plugins.pings.add(lng, lat, {
+                color: color,
+                ttl: 2000,
+                angle: 5
+            });
+        }, 150);
+
+
+        var canvas = document.getElementById('rotatingGlobe');
+        // Special code to handle high-density displays (e.g. retina, some phones)
+        // In the future, Planetary.js will handle this by itself (or via a plugin).
+        if (window.devicePixelRatio == 2) {
+            canvas.width = 1600;
+            canvas.height = 1600;
+            context = canvas.getContext('2d');
+            context.scale(2, 2);
+        }
+        // Draw that globe!
+        globe.draw(canvas);
+
+
+
+
+        // This plugin will automatically rotate the globe around its vertical
+        // axis a configured number of degrees every second.
+        function autorotate(degPerSec) {
+            // Planetary.js plugins are functions that take a `planet` instance
+            // as an argument...
+            return function(planet) {
+                var lastTick = null;
+                var paused = false;
+                planet.plugins.autorotate = {
+                    pause: function() {
+                        paused = true;
+                    },
+                    resume: function() {
+                        paused = false;
+                    }
+                };
+                // ...and configure hooks into certain pieces of its lifecycle.
+                planet.onDraw(function() {
+                    if (paused || !lastTick) {
+                        lastTick = new Date();
+                    } else {
+                        var now = new Date();
+                        var delta = now - lastTick;
+                        // This plugin uses the built-in projection (provided by D3)
+                        // to rotate the globe each time we draw it.
+                        var rotation = planet.projection.rotate();
+                        rotation[0] += degPerSec * delta / 1000;
+                        if (rotation[0] >= 180) rotation[0] -= 360;
+                        planet.projection.rotate(rotation);
+                        lastTick = now;
+                    }
+                });
+            };
+        };
+    })();
+
+
+    var giza = LatLon(29.979175,31.134358);
+    var nazca = LatLon(-14.716667,-75.133333);
+    var machuPichu = LatLon(-13.163333,-72.545556);
+    var angkorWat = LatLon(13.4125,103.866667);
+    var easterIslands = LatLon(-27.125833, -109.276944);
+    </script>
+</body>
+
+</html>

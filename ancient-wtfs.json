@@ -1,0 +1,416 @@
+var wtfs = [
+    {
+    	"loc": {
+            "lat": 29.979175,
+            "lng": 31.134358
+        },
+    	"name": "Great Pyramid of Giza",
+        "wiki": "https://en.wikipedia.org/wiki/Great_Pyramid_of_Giza"
+    },{
+    	"loc": {
+            "lat": 29.808333,
+            "lng": 31.205833
+        },
+    	"name": "Red Pyramid",
+        "wiki": "https://en.wikipedia.org/wiki/Red_Pyramid"
+    },{
+    	"loc": {
+            "lat": 29.871267,
+            "lng": 31.216394
+        },
+    	"name": "Pyramid of Djoser",
+        "wiki": "https://en.wikipedia.org/wiki/Pyramid_of_Djoser"
+    },{
+    	"loc": {
+            "lat": 30.328611,
+            "lng": 35.441944
+        },
+    	"name": "Petra",
+        "wiki": "https://en.wikipedia.org/wiki/Petra"
+    },{
+    	"loc": {
+            "lat": -14.716667,
+            "lng": -75.133333
+        },
+    	"name": "Nazca Lines",
+        "wiki": "https://en.wikipedia.org/wiki/Nazca_Lines"
+    },{
+        "loc": {
+            "lat": -27.125833,
+            "lng": -109.276944
+        },
+        "name": "Easter Island - Ahu Tongariki",
+        "wiki": "https://en.wikipedia.org/wiki/Ahu_Tongariki"
+    },{
+        "loc": {
+            "lat": -13.163333,
+            "lng": -72.545556
+        },
+        "name": "Machu Picchu",
+        "wiki": "https://en.wikipedia.org/wiki/Machu_Picchu"
+    },{
+        "loc": {
+            "lat": 13.4125,
+            "lng": 103.866667
+        },
+        "name": "Angkor Wat",
+        "wiki": "https://en.wikipedia.org/wiki/Angkor_Wat"
+    },{
+        "loc": {
+            "lat": 8.911389,
+            "lng": -83.4775
+        },
+        "name": "Stone spheres of Costa Rica",
+        "wiki": "https://en.wikipedia.org/wiki/Stone_spheres_of_Costa_Rica"
+    },{
+        "loc": {
+            "lat": 24.432,
+            "lng": 123.011
+        },
+        "name": "Yonaguni Monument",
+        "wiki": "https://en.wikipedia.org/wiki/Yonaguni_Monument"
+    },{
+        "loc": {
+            "lat": 30.962778,
+            "lng": 46.103056
+        },
+        "name": "Ziggurat of Ur",
+        "wiki": "https://en.wikipedia.org/wiki/Ziggurat_of_Ur"
+    },{
+        "loc": {
+            "lat": 33.353611,
+            "lng": 44.202222
+        },
+        "name": "Ziggurat of Aqar Quf",
+        "wiki": "https://en.wikipedia.org/wiki/Dur-Kurigalzu"
+    },{
+        "loc": {
+            "lat": 32.536389,
+            "lng": 44.420833
+        },
+        "name": "Etemenanki",
+        "wiki": "https://en.wikipedia.org/wiki/Etemenanki"
+    },{
+        "loc": {
+            "lat": 33.968889,
+            "lng": 51.404722
+        },
+        "name": "Tepe Sialk",
+        "wiki": "https://en.wikipedia.org/wiki/Tepe_Sialk"
+    },{
+        "loc": {
+            "lat": -10.893611,
+            "lng": -77.520278
+        },
+        "name": "Caral",
+        "wiki": "https://en.wikipedia.org/wiki/Caral"
+    },{
+        "loc": {
+            "lat": 41.876389,
+            "lng":  12.480833
+        },
+        "name": "Pyramid of Cestius",
+        "wiki": "https://en.wikipedia.org/wiki/Pyramid_of_Cestius"
+    },{
+        "loc": {
+            "lat": 38.660667,
+            "lng": -90.062044
+        },
+        "name": "Monks Mound",
+        "wiki": "https://en.wikipedia.org/wiki/Monks_Mound"
+    },{
+        "loc": {
+            "lat": 19.0575,
+            "lng": -98.301944
+        },
+        "name": "Great Pyramid of Cholula (Tlachihualtepetl)",
+        "wiki": "https://en.wikipedia.org/wiki/Great_Pyramid_of_Cholula"
+    },{
+        "loc": {
+            "lat": 18.803889,
+            "lng": -99.295917
+        },
+        "name": "Xochicalco",
+        "wiki": "https://en.wikipedia.org/wiki/Xochicalco"
+    },{
+        "loc": {
+            "lat": 20.359444,
+            "lng": -89.771389
+        },
+        "name": "Uxmal",
+        "wiki": "https://en.wikipedia.org/wiki/Uxmal"
+    },{
+        "loc": {
+            "lat": 19.6925,
+            "lng": -98.8438
+        },
+        "name": "Pyramid of the Sun",
+        "wiki": "https://en.wikipedia.org/wiki/Pyramid_of_the_Sun"
+    },,{
+        "loc": {
+            "lat": 19.435,
+            "lng": -99.131389
+        },
+        "name": "Templo Mayor",
+        "wiki": "https://en.wikipedia.org/wiki/Templo_Mayor"
+    },{
+        "loc": {
+            "lat": 16.933333,
+            "lng":  33.726389
+        },
+        "name": "Pyramids of the Kushite rulers at Meroë",
+        "wiki": "https://en.wikipedia.org/wiki/Mero%C3%AB"
+    },{
+        "loc": {
+            "lat": 19.6996,
+            "lng":  -98.844
+        },
+        "name": "Pyramid of the Moon",
+        "wiki": "https://en.wikipedia.org/wiki/Pyramid_of_the_Moon"
+    },{
+        "loc": {
+            "lat": -7.627222,
+            "lng":  111.131111
+        },
+        "name": "Sukuh",
+        "wiki": "https://en.wikipedia.org/wiki/Candi_Sukuh"
+    },{
+        "loc": {
+            "lat": 13.783333,
+            "lng": 104.533333
+        },
+        "name": "Koh Ker",
+        "wiki": "https://en.wikipedia.org/wiki/Koh_Ker"
+    },{
+        "loc": {
+            "lat": 28.320833,
+            "lng": -16.413611
+        },
+        "name": "Pyramids of Güímar",
+        "wiki": "https://en.wikipedia.org/wiki/Pyramids_of_G%C3%BC%C3%ADmar"
+    },{
+        "loc": {
+            "lat": 32.008333,
+            "lng": 48.520833
+        },
+        "name": "Chogha Zanbil",
+        "wiki": "https://en.wikipedia.org/wiki/Chogha_Zanbil"
+    },{
+        "loc": {
+            "lat": 34.625,
+            "lng": 112.3753
+        },
+        "name": "Tomb of King Ling of Zhou",
+        "wiki": "https://en.wikipedia.org/wiki/Chinese_pyramids"
+    },{
+        "loc": {
+            "lat": 34.628,
+            "lng": 112.3829
+        },
+        "name": "Tomb of Three Kings of Zhou",
+        "wiki": "https://en.wikipedia.org/wiki/Chinese_pyramids"
+    },{
+        "loc": {
+            "lat": 36.706705,
+            "lng": 114.418852
+        },
+        "name": "Tomb of King of Zhao state",
+        "wiki": "https://en.wikipedia.org/wiki/Chinese_pyramids"
+    },{
+        "loc": {
+            "lat": 39.304906,
+            "lng": 115.540702
+        },
+        "name": "Burial complex in ancient Xiadu",
+        "wiki": "https://en.wikipedia.org/wiki/Chinese_pyramids"
+    },{
+        "loc": {
+            "lat": 34.381236,
+            "lng": 109.254012
+        },
+        "name": "Tomb of First Emperor in Lintong",
+        "wiki": "https://en.wikipedia.org/wiki/Chinese_pyramids"
+    },{
+        "loc": {
+            "lat": 34.338085,
+            "lng": 108.569684
+        },
+        "name": "Tomb of Emperor Wu of Han",
+        "wiki": "https://en.wikipedia.org/wiki/Chinese_pyramids"
+    },{
+        "loc": {
+            "lat": 34.28785,
+            "lng": 108.02289
+        },
+        "name": "Tomb of Emperor Wen of Sui",
+        "wiki": "https://en.wikipedia.org/wiki/Chinese_pyramids"
+    },{
+        "loc": {
+            "lat": 36.632869,
+            "lng": 101.746123
+        },
+        "name": "The Lianhu Altar",
+        "wiki": "https://en.wikipedia.org/wiki/Chinese_pyramids"
+    },{
+        "loc": {
+            "lat": 37.235, 
+            "lng": -115.811111
+        },
+        "name": "Area51",
+        "wiki": "https://de.wikipedia.org/wiki/Area_51"
+    },{
+        "loc": {
+            "lat": 33.968333, 
+            "lng": -105.243333
+        },
+        "name": "Roswell UFO incident",
+        "wiki": "https://en.wikipedia.org/wiki/Roswell_UFO_incident"
+    },{
+        "loc": {
+            "lat": 	51.415556, 
+            "lng": -1.8575
+        },
+        "name": "Silbury Hill",
+        "wiki": "https://en.wikipedia.org/wiki/Silbury_Hill"
+    },{
+        "loc": {
+            "lat": 	51.178844, 
+            "lng": -1.826189
+        },
+        "name": "Stonehenge",
+        "wiki": "https://en.wikipedia.org/wiki/Stonehenge"
+    },{
+        "loc": {
+            "lat": 	20.682778, 
+            "lng": -88.568611
+        },
+        "name": "Temple of Kukulcan (El Castillo, Chichen Itza)",
+        "wiki": "https://en.wikipedia.org/wiki/El_Castillo,_Chichen_Itza"
+    },{
+        "loc": {
+            "lat": 	31.066667, 
+            "lng": 81.3125
+        },
+        "name": "Kailash",
+        "wiki": "https://de.wikipedia.org/wiki/Kailash"
+    },{
+        "loc": {
+            "lat": 	11.205244, 
+            "lng": 79.452782
+        },
+        "name": "Gangaikonda Cholapuram",
+        "wiki": "https://en.wikipedia.org/wiki/Gangaikonda_Cholapuram"
+    },{
+        "loc": {
+            "lat": 10.782778,
+            "lng":  79.131667
+        },
+        "name": "Brihadeeswarar Temple",
+        "wiki": "https://en.wikipedia.org/wiki/Brihadeeswarar_Temple"
+    },{
+        "loc": {
+            "lat": 10.94841,
+            "lng":  79.356708
+        },
+        "name": "Airavatesvara Temple",
+        "wiki": "https://en.wikipedia.org/wiki/Airavatesvara_Temple"
+    },{
+        "loc": {
+            "lat": 33.999167,
+            "lng":  36.200278
+        },
+        "name": "Stone of the Pregnant Woman",
+        "wiki": "https://en.wikipedia.org/wiki/Stone_of_the_Pregnant_Woman"
+    },{
+        "loc": {
+            "lat": 32.068611,
+            "lng":  119.000556
+        },
+        "name": "Yangshan Quarry",
+        "wiki": "https://en.wikipedia.org/wiki/Yangshan_Quarry"
+    },{
+        "loc": {
+            "lat": -13.794583,
+            "lng":  -76.308697
+        },
+        "name": "Paracas Candelabra",
+        "wiki": "https://en.wikipedia.org/wiki/Paracas_Candelabra"
+    },{
+        "loc": {
+            "lat": -13.253889,
+            "lng":  -72.263611
+        },
+        "name": "Ollantaytambo",
+        "wiki": "https://en.wikipedia.org/wiki/Ollantaytambo"
+    },{
+        "loc": {
+            "lat": -13.507778,
+            "lng":  -71.982222
+        },
+        "name": "Saksaywaman",
+        "wiki": "https://en.wikipedia.org/wiki/Saksaywaman"
+    },{
+        "loc": {
+            "lat": -12.673164,
+            "lng":  -71.4612
+        },
+        "name": "Paratoari",
+        "wiki": "https://en.wikipedia.org/wiki/Paratoari"
+    },{
+        "loc": {
+            "lat": 25.166667,
+            "lng":  8.166667  
+        },
+        "name": "Tassili n'Ajjer",
+        "wiki": "https://en.wikipedia.org/wiki/Tassili_n%27Ajjer"
+    },{
+        "loc": {
+            "lat": 29.183333,
+            "lng":  25.55  
+        },
+        "name": "Siwa Oasis",
+        "wiki": "https://en.wikipedia.org/wiki/Siwa_Oasis"
+    },{
+        "loc": {
+            "lat": 29.934444,
+            "lng":   52.891389 
+        },
+        "name": "Persepolis",
+        "wiki": "https://en.wikipedia.org/wiki/Persepolis"
+    },{
+        "loc": {
+            "lat": 27.329167,
+            "lng": 68.138889 
+        },
+        "name": "Mohenjo-daro",
+        "wiki": "https://en.wikipedia.org/wiki/Mohenjo-daro"
+    },{
+        "loc": {
+            "lat": 24.63,
+            "lng": 79.5 
+        },
+        "name": "Khajuraho Group of Monuments",
+        "wiki": "https://en.wikipedia.org/wiki/Khajuraho_Group_of_Monuments"
+    },{
+        "loc": {
+            "lat": 18.816944,
+            "lng": 95.218056
+        },
+        "name": "Pyay",
+        "wiki": "https://en.wikipedia.org/wiki/Pyay#History"
+    },{
+        "loc": {
+            "lat": 17.021111,
+            "lng": 99.703611
+        },
+        "name": "Sukhothai",
+        "wiki": "https://en.wikipedia.org/wiki/Sukhothai_Historical_Park"
+    },{
+        "loc": {
+            "lat": 14.393056,
+            "lng": 104.680278
+        },
+        "name": "Preah Vihear Temple",
+        "wiki": "https://en.wikipedia.org/wiki/Preah_Vihear_Temple"
+    }
+]
