@@ -58,7 +58,7 @@
     </div>
     <script>
     'use strict';
-    (function() {
+    window.onload = function() {
         var canvas = document.createElement('canvas');
         canvas.id = 'rotatingGlobe';
         canvas.width = window.innerWidth;
@@ -332,7 +332,7 @@
                 });
             };
         };
-    })();
+    };
 
 
     var giza = LatLon(29.979175,31.134358);
