@@ -60,7 +60,7 @@
     </div>
     <script>
 
-    document.addEventListener("DOMContentLoaded", function(event) {
+    window.addEventListener("load", function(event) {
         var canvas = document.createElement('canvas');
         canvas.id = 'rotatingGlobe';
         canvas.width = window.innerWidth;
@@ -288,12 +288,12 @@
         var canvas = document.getElementById('rotatingGlobe');
         // Special code to handle high-density displays (e.g. retina, some phones)
         // In the future, Planetary.js will handle this by itself (or via a plugin).
-        if (window.devicePixelRatio == 2) {
-            canvas.width = 1600;
-            canvas.height = 1600;
-            context = canvas.getContext('2d');
-            context.scale(2, 2);
-        }
+        // if (window.devicePixelRatio == 2) {
+        //     canvas.width = 1600;
+        //     canvas.height = 1600;
+        //     context = canvas.getContext('2d');
+        //     context.scale(2, 2);
+        // }
         // Draw that globe!
         globe.draw(canvas);
 
