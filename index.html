@@ -22,12 +22,13 @@
         margin: 0;
         font-family: 'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;
     }
-    
+
     canvas {
         z-index: 1;
     }
-    
-    #selected, #explanation {
+
+    #selected,
+    #explanation {
         position: absolute;
         top: 0;
         left: 0;
@@ -35,17 +36,18 @@
         z-index: 2;
         background-color: rgba(0, 0, 0, 0.7);
     }
-    
-    #selected a, #explanation a {
+
+    #selected a,
+    #explanation a {
         color: lime;
         text-decoration: none;
     }
 
-    #explanation{
-      left:auto;
-      top:auto;
-      right:0;
-      bottom: 0;
+    #explanation {
+        left: auto;
+        top: auto;
+        right: 0;
+        bottom: 0;
     }
     </style>
 </head>
@@ -54,11 +56,11 @@
     <div class="stars"></div>
     <div id="selected"></div>
     <div id="explanation">
-      <a href="https://github.com/RobinLinus/ancient-wtf/blob/master/README.md" target="_blank">Explanation</a>
+        <a href="https://github.com/RobinLinus/ancient-wtf/blob/master/README.md" target="_blank">Explanation</a>
     </div>
     <script>
-    'use strict';
-    window.onload = function() {
+
+    document.addEventListener("DOMContentLoaded", function(event) {
         var canvas = document.createElement('canvas');
         canvas.id = 'rotatingGlobe';
         canvas.width = window.innerWidth;
@@ -125,7 +127,7 @@
         ]
 
         //And a second one perpendicular to Nazca
-        var b = a.cross(b); 
+        var b = a.cross(b);
 
         var line2 = [lineAroundGlobe(0),
             lineAroundGlobe(Math.PI / 2),
@@ -259,10 +261,10 @@
                         clicked = wtf;
                     }
                 });
-                if(!clicked)
-                  return;
-                if(clicked == globe.selected){
-                  window.open(clicked.wiki,'_wiki');
+                if (!clicked)
+                    return;
+                if (clicked == globe.selected) {
+                    window.open(clicked.wiki, '_wiki');
                 }
                 return false;
             }
@@ -332,25 +334,31 @@
                 });
             };
         };
-    };
+    });
 
 
-    var giza = LatLon(29.979175,31.134358);
-    var nazca = LatLon(-14.716667,-75.133333);
-    var machuPichu = LatLon(-13.163333,-72.545556);
-    var angkorWat = LatLon(13.4125,103.866667);
+    var giza = LatLon(29.979175, 31.134358);
+    var nazca = LatLon(-14.716667, -75.133333);
+    var machuPichu = LatLon(-13.163333, -72.545556);
+    var angkorWat = LatLon(13.4125, 103.866667);
     var easterIslands = LatLon(-27.125833, -109.276944);
     </script>
-
     <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
     ga('create', 'UA-88011654-1', 'auto');
     ga('send', 'pageview');
-  </script>
+    </script>
 </body>
 
 </html>
